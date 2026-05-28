@@ -29,7 +29,7 @@
 ## Run Locally
 
 ```bash
-git clone https://github.com/funiantay/cryptonex.git
+git clone https://github.com/Funiantay/CryptoNex.git
 cd cryptonex
 # Open index.html in your browser — no setup needed
 
