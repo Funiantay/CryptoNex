@@ -1,6 +1,6 @@
 # CryptoNex — Crypto Intelligence Platform
 
-Track live prices, analyze markets, manage your portfolio, and predict price movements — all in one place.
+CryptoNex is a fully client-side cryptocurrency intelligence platform that delivers real-time price tracking, interactive technical analysis with indicators, AI-assisted price, prediction using linear regression, and a complete portfolio management system with profit and loss tracking.
 
 **Live Demo:** https://funiantay.github.io/CryptoNex/
 
