@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CryptoNex — Crypto Intelligence Platform</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@300;400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <div class="plasma-bg" aria-hidden="true">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Loading Screen -->
+  <div id="loading-screen">
+    <div class="loader-wrap">
+      <div class="loader-logo-text">CRYPTONEX</div>
+      <div class="loader-tagline">CRYPTO INTELLIGENCE PLATFORM</div>
+      <div class="loader-bar-wrap">
+        <div class="loader-bar"><div class="loader-fill"></div></div>
+        <span class="loader-pct" id="loader-pct">0%</span>
+      </div>
+      <div class="loader-steps">
+        <span class="step-dot active"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+        <span class="step-dot"></span>
+      </div>
+      <div class="loader-step-label" id="loader-step-label">Connecting to markets...</div>
+    </div>
+  </div>
+
+  <!-- Toast Notifications -->
+  <div id="toast-container" aria-live="polite"></div>
+
+  <div id="app" class="hidden">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-logo">
+        <div class="logo-icon">
+          <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="nl" x1="3" y1="3" x2="31" y2="31" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F72585"/>
+                <stop offset="1" stop-color="#4CC9F0"/>
+              </linearGradient>
+              <linearGradient id="nl2" x1="17" y1="3" x2="17" y2="31" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#F72585" stop-opacity="0.18"/>
+                <stop offset="1" stop-color="#4CC9F0" stop-opacity="0.08"/>
+              </linearGradient>
+            </defs>
+            <path d="M17 3L31 10.5V23.5L17 31L3 23.5V10.5L17 3Z" fill="url(#nl2)" stroke="url(#nl)" stroke-width="1.5"/>
+            <path d="M17 3L17 31" stroke="url(#nl)" stroke-width="0.6" stroke-opacity="0.35"/>
+            <path d="M3 10.5L31 23.5" stroke="url(#nl)" stroke-width="0.6" stroke-opacity="0.35"/>
+            <path d="M3 23.5L31 10.5" stroke="url(#nl)" stroke-width="0.6" stroke-opacity="0.35"/>
+            <path d="M17 9L22.5 17L17 25L11.5 17L17 9Z" fill="url(#nl)" opacity="0.9"/>
+            <circle cx="17" cy="17" r="2.5" fill="#ffffff" opacity="0.95"/>
+          </svg>
+        </div>
+        <div class="logo-wordmark">CRYPTONEX</div>
+      </div>
+      <nav class="nav-menu">
+        <button class="nav-item active" data-view="dashboard">
+          <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg></span>
+          <span>Dashboard</span>
+          <span class="nav-pip"></span>
+        </button>
+        <button class="nav-item" data-view="markets">
+          <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+          <span>Markets</span>
+          <span class="nav-pip"></span>
+        </button>
+        <button class="nav-item" data-view="charts">
+          <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+          <span>Charts</span>
+          <span class="nav-pip"></span>
+        </button>
+        <button class="nav-item" data-view="portfolio">
+          <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span>
+          <span>Portfolio</span>
+          <span class="nav-pip"></span>
+        </button>
+        <button class="nav-item" data-view="prediction">
+          <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 21H4.6A1.6 1.6 0 0 1 3 19.4V3"/><path d="m7 14 4-4 4 4 4-4"/></svg></span>
+          <span>Prediction</span>
+          <span class="nav-pip"></span>
+        </button>
+        <button class="nav-item" data-view="watchlist">
+          <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg></span>
+          <span>Watchlist</span>
+          <span class="nav-pip"></span>
+        </button>
+        <button class="nav-item" data-view="heatmap">
+          <span class="nav-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="4" height="5" rx="1"/><rect x="10" y="3" width="5" height="3" rx="1"/><rect x="18" y="3" width="3" height="4" rx="1"/><rect x="3" y="11" width="4" height="3" rx="1"/><rect x="10" y="9" width="11" height="5" rx="1"/><rect x="3" y="17" width="18" height="4" rx="1"/></svg></span>
+          <span>Heatmap</span>
+          <span class="nav-pip"></span>
+        </button>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="live-badge">
+          <span class="pulse-ring"></span>
+          <span class="live-dot"></span>
+          <span>LIVE</span>
+        </div>
+        <div class="sidebar-ver">v2.0</div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <div class="main-wrapper">
+
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <button id="sidebar-toggle" class="sidebar-toggle-btn" title="Toggle sidebar">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <rect x="3" y="3" width="18" height="18" rx="2"/>
+            <path d="M9 3v18"/>
+          </svg>
+        </button>
+        <button id="theme-toggle" class="theme-toggle-btn" title="Toggle light/dark theme">
+          <svg class="theme-icon" id="theme-icon-moon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          <svg class="theme-icon hidden-icon" id="theme-icon-sun" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        </button>
+        <div class="search-wrapper">
+          <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+          <input type="text" id="search-input" placeholder="Search coins, symbols..." autocomplete="off">
+          <div id="search-results" class="search-dropdown hidden"></div>
+        </div>
+        <div class="global-stats">
+          <button class="gstat-trigger" title="Market Stats">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/>
+              <line x1="6" y1="20" x2="6" y2="14"/>
+            </svg>
+            <span>Stats</span>
+          </button>
+          <div class="gstat-popup">
+            <div class="gstat">
+              <span class="gstat-label">Market Cap</span>
+              <span id="global-mcap" class="gstat-value">—</span>
+            </div>
+            <div class="gstat">
+              <span class="gstat-label">24h Volume</span>
+              <span id="global-vol" class="gstat-value">—</span>
+            </div>
+            <div class="gstat">
+              <span class="gstat-label">BTC Dom</span>
+              <span id="global-btc-dom" class="gstat-value">—</span>
+            </div>
+            <div class="gstat">
+              <span class="gstat-label">Coins</span>
+              <span id="global-coins" class="gstat-value">—</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Live Ticker Strip -->
+      <div class="ticker-strip">
+        <div class="ticker-track" id="ticker-track">
+          <span class="ticker-placeholder">Loading market data...</span>
+        </div>
+      </div>
+
+      <main class="content-area">
+
+        <!-- ── DASHBOARD ── -->
+        <section id="view-dashboard" class="view active">
+          <div class="view-header">
+            <div class="view-title-block">
+              <h1>Market Overview</h1>
+              <p class="view-sub">Live cryptocurrency intelligence — updated every minute</p>
+            </div>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card" style="--accent: var(--magenta)">
+              <div class="sc-label">Total Market Cap</div>
+              <div class="sc-value" id="dash-mcap">—</div>
+              <div class="sc-change" id="dash-mcap-change"></div>
+              <div class="sc-glow"></div>
+            </div>
+            <div class="stat-card" style="--accent: var(--cyan)">
+              <div class="sc-label">24h Volume</div>
+              <div class="sc-value" id="dash-vol">—</div>
+              <div class="sc-glow"></div>
+            </div>
+            <div class="stat-card" style="--accent: var(--indigo)">
+              <div class="sc-label">BTC Dominance</div>
+              <div class="sc-value" id="dash-btc-dom">—</div>
+              <div class="sc-glow"></div>
+            </div>
+            <div class="stat-card" style="--accent: var(--green)">
+              <div class="sc-label">Active Coins</div>
+              <div class="sc-value" id="dash-coins">—</div>
+              <div class="sc-glow"></div>
+            </div>
+          </div>
+
+          <!-- Converter & Dominance Row -->
+          <div class="dash-tools-row">
+            <div class="panel converter-panel">
+              <div class="panel-header"><h2>💱 Converter</h2></div>
+              <div class="converter-body">
+                <div class="conv-row">
+                  <input type="number" id="conv-amount" value="1" min="0" step="any" class="conv-input">
+                  <div id="conv-coin-wrap" style="flex:1;min-width:0;"></div>
+                </div>
+                <div class="conv-arrow">⇅</div>
+                <div class="conv-results">
+                  <div class="conv-result-item"><span class="conv-curr">USD</span><span id="conv-usd" class="conv-val">—</span></div>
+                  <div class="conv-result-item"><span class="conv-curr">BTC</span><span id="conv-btc" class="conv-val">—</span></div>
+                  <div class="conv-result-item"><span class="conv-curr">ETH</span><span id="conv-eth" class="conv-val">—</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel dominance-panel">
+              <div class="panel-header"><h2>Market Dominance</h2></div>
+              <div id="dominance-bar-wrap" class="dominance-wrap"></div>
+            </div>
+          </div>
+
+          <!-- Insight Row: Sentiment + News -->
+          <div class="insight-row">
+            <div class="panel fg-panel">
+              <div class="panel-header">
+                <h2>Market Sentiment</h2>
+                <span class="badge-pill" id="fg-badge">Fear &amp; Greed</span>
+              </div>
+              <div class="fg-body">
+                <div class="fg-gauge-wrap">
+                  <svg viewBox="0 0 200 130" class="fg-svg">
+                    <defs>
+                      <linearGradient id="fg-grad" x1="0%" y1="0%" x2="100%" y2="0%">
+                        <stop offset="0%"   stop-color="#EF233C"/>
+                        <stop offset="28%"  stop-color="#FF6B35"/>
+                        <stop offset="50%"  stop-color="#FFB703"/>
+                        <stop offset="72%"  stop-color="#06D6A0"/>
+                        <stop offset="100%" stop-color="#4CC9F0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="14" stroke-linecap="round"/>
+                    <path id="fg-arc" d="M 20 105 A 80 80 0 0 1 180 105" fill="none" stroke="url(#fg-grad)" stroke-width="14" stroke-linecap="round" stroke-dasharray="251.3" stroke-dashoffset="251.3"/>
+                    <line id="fg-needle" x1="100" y1="107" x2="100" y2="37" stroke="rgba(255,255,255,0.85)" stroke-width="2.5" stroke-linecap="round"/>
+                    <circle cx="100" cy="107" r="5" fill="white" opacity="0.9"/>
+                  </svg>
+                  <div class="fg-score" id="fg-value">--</div>
+                  <div class="fg-category" id="fg-label">Loading...</div>
+                  <div class="fg-updated" id="fg-updated"></div>
+                </div>
+                <div class="fg-scale">
+                  <span style="color:#EF233C">Extreme<br>Fear</span>
+                  <span style="color:#FFB703">Neutral</span>
+                  <span style="color:#4CC9F0">Extreme<br>Greed</span>
+                </div>
+              </div>
+            </div>
+            <div class="panel pulse-panel">
+              <div class="panel-header">
+                <h2>Market Pulse</h2>
+                <span class="badge-pill">24h</span>
+              </div>
+              <div class="pulse-body">
+                <div class="pulse-half">
+                  <div class="pulse-half-label gain">
+                    <svg width="8" height="8" viewBox="0 0 10 10" fill="currentColor"><path d="M5 0L10 10H0z"/></svg>
+                    Top Gainers
+                  </div>
+                  <div id="pulse-gainers" class="pulse-list"></div>
+                </div>
+                <div class="pulse-sep"></div>
+                <div class="pulse-half">
+                  <div class="pulse-half-label loss">
+                    <svg width="8" height="8" viewBox="0 0 10 10" fill="currentColor"><path d="M5 10L0 0H10z"/></svg>
+                    Top Losers
+                  </div>
+                  <div id="pulse-losers" class="pulse-list"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-grid">
+            <div class="panel">
+              <div class="panel-header">
+                <h2>Top Markets</h2>
+                <button class="btn-ghost" id="view-all-markets">View All →</button>
+              </div>
+              <div class="table-scroll">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>#</th><th>Coin</th><th>Price</th><th>24h</th><th>7d</th><th>Market Cap</th><th>Trend</th></tr>
+                  </thead>
+                  <tbody id="top-coins-body"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="side-panels">
+              <div class="panel">
+                <div class="panel-header"><h2>🔥 Trending</h2></div>
+                <div id="trending-list"></div>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><h2>🚀 Top Gainers</h2></div>
+                <div id="gainers-list"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── HEATMAP ── -->
+        <section id="view-heatmap" class="view">
+          <div class="view-header">
+            <div class="view-title-block">
+              <h1>Market Heatmap</h1>
+              <p class="view-sub">Top 100 coins — colored by price performance</p>
+            </div>
+            <div class="view-controls">
+              <div class="btn-group" id="heatmap-metric-group">
+                <button class="btn-seg active" data-metric="24h">24h</button>
+                <button class="btn-seg" data-metric="7d">7d</button>
+                <button class="btn-seg" data-metric="1h">1h</button>
+              </div>
+            </div>
+          </div>
+          <div id="heatmap-legend" class="heatmap-legend"></div>
+          <div id="heatmap-container" class="heatmap-container"></div>
+        </section>
+
+        <!-- ── MARKETS ── -->
+        <section id="view-markets" class="view">
+          <div class="view-header">
+            <div class="view-title-block"><h1>Markets</h1></div>
+            <div class="view-controls">
+              <input type="text" id="market-search" placeholder="Filter coins...">
+              <div id="market-sort-wrap" style="min-width:160px;"></div>
+            </div>
+          </div>
+          <div class="market-filter-bar" id="market-filter-bar">
+            <button class="mfilter active" data-filter="all">All</button>
+            <button class="mfilter" data-filter="gainers">▲ Gainers</button>
+            <button class="mfilter" data-filter="losers">▼ Losers</button>
+            <button class="mfilter" data-filter="top10">Top 10</button>
+            <button class="mfilter" data-filter="volume">High Volume</button>
+            <button class="mfilter" data-filter="watchlist">★ Watchlist</button>
+          </div>
+          <div class="panel">
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>#</th><th>Coin</th><th>Price</th>
+                    <th>1h</th><th>24h</th><th>7d</th><th>30d</th>
+                    <th>Volume 24h</th><th>Market Cap</th><th></th><th></th><th></th>
+                  </tr>
+                </thead>
+                <tbody id="markets-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── CHARTS ── -->
+        <section id="view-charts" class="view">
+          <div class="view-header">
+            <div class="chart-coin-display" id="chart-coin-display">
+              <div id="chart-coin-select-wrap" class="chart-coin-select-wrap"></div>
+              <img id="chart-coin-icon" src="" alt="" onerror="this.style.display='none'">
+              <div>
+                <div id="chart-coin-name" class="ccd-name">Bitcoin</div>
+                <div id="chart-coin-symbol" class="ccd-sym">BTC / USD</div>
+              </div>
+              <div id="chart-current-price" class="ccd-price">—</div>
+              <div id="chart-price-change" class="ccd-change">—</div>
+            </div>
+            <div class="chart-controls">
+              <div class="btn-group" id="chart-type-group">
+                <button class="btn-seg active" data-type="candlestick">Candle</button>
+                <button class="btn-seg" data-type="line">Line</button>
+                <button class="btn-seg" data-type="area">Area</button>
+              </div>
+              <div class="btn-group" id="timeframe-group">
+                <button class="btn-seg active" data-days="1">1D</button>
+                <button class="btn-seg" data-days="7">1W</button>
+                <button class="btn-seg" data-days="30">1M</button>
+                <button class="btn-seg" data-days="90">3M</button>
+                <button class="btn-seg" data-days="365">1Y</button>
+              </div>
+            </div>
+          </div>
+          <div class="chart-layout">
+            <div class="chart-main">
+              <div class="panel chart-panel">
+                <div id="main-chart-container"></div>
+                <canvas id="draw-overlay" style="position:absolute;top:0;left:0;pointer-events:none;"></canvas>
+              </div>
+              <div class="panel chart-sub-panel" id="volume-panel">
+                <span class="sub-lbl">VOLUME</span>
+                <div id="volume-chart-container"></div>
+              </div>
+              <div class="panel chart-sub-panel hidden" id="macd-panel">
+                <span class="sub-lbl">MACD</span>
+                <div id="macd-chart-container"></div>
+              </div>
+              <div class="panel chart-sub-panel hidden" id="rsi-panel">
+                <span class="sub-lbl">RSI (14)</span>
+                <div id="rsi-chart-container"></div>
+              </div>
+            </div>
+            <div class="chart-sidebar">
+              <div class="panel">
+                <div class="panel-header"><h3>Indicators</h3></div>
+                <div class="indicator-list">
+                  <label class="ind-item"><input type="checkbox" id="toggle-sma20" checked><span class="ind-swatch" style="--c:#F72585"></span><span>SMA 20</span></label>
+                  <label class="ind-item"><input type="checkbox" id="toggle-sma50"><span class="ind-swatch" style="--c:#4CC9F0"></span><span>SMA 50</span></label>
+                  <label class="ind-item"><input type="checkbox" id="toggle-ema20"><span class="ind-swatch" style="--c:#4361EE"></span><span>EMA 20</span></label>
+                  <label class="ind-item"><input type="checkbox" id="toggle-bb"><span class="ind-swatch" style="--c:#7209B7"></span><span>Bollinger Bands</span></label>
+                  <label class="ind-item"><input type="checkbox" id="toggle-macd"><span class="ind-swatch" style="--c:#06D6A0"></span><span>MACD</span></label>
+                  <label class="ind-item"><input type="checkbox" id="toggle-rsi"><span class="ind-swatch" style="--c:#EF233C"></span><span>RSI (14)</span></label>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><h3>Coin Stats</h3></div>
+                <div id="coin-stats-content" class="coin-stats-grid"></div>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><h3>Drawing Tools</h3></div>
+                <div class="draw-tools">
+                  <button class="draw-btn active" data-tool="none" title="Cursor">↖</button>
+                  <button class="draw-btn" data-tool="trendline" title="Trend Line">╱</button>
+                  <button class="draw-btn" data-tool="horizontal" title="Horizontal Line">─</button>
+                  <button class="draw-btn" data-tool="annotation" title="Annotate">✎</button>
+                  <button class="draw-btn danger" id="clear-drawings" title="Clear All">✕</button>
+                </div>
+                <div id="draw-hint" class="draw-hint hidden"></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── PORTFOLIO ── -->
+        <section id="view-portfolio" class="view">
+          <div class="view-header">
+            <div class="view-title-block"><h1>Portfolio</h1></div>
+            <div class="view-controls">
+              <button class="btn-ghost" id="export-csv-btn">⬇ Export CSV</button>
+              <button class="btn-primary" id="add-holding-btn">+ Add Holding</button>
+            </div>
+          </div>
+          <div class="portfolio-summary">
+            <div class="stat-card highlight" style="--accent: var(--magenta)">
+              <div class="sc-label">Total Value</div>
+              <div class="sc-value" id="portfolio-total-value">$0.00</div>
+              <div class="sc-change" id="portfolio-total-change"></div>
+              <div class="sc-glow"></div>
+            </div>
+            <div class="stat-card" style="--accent: var(--cyan)">
+              <div class="sc-label">Total Cost</div>
+              <div class="sc-value" id="portfolio-total-cost">$0.00</div>
+              <div class="sc-glow"></div>
+            </div>
+            <div class="stat-card" style="--accent: var(--indigo)">
+              <div class="sc-label">Total P&amp;L</div>
+              <div class="sc-value" id="portfolio-pnl">$0.00</div>
+              <div class="sc-change" id="portfolio-pnl-pct"></div>
+              <div class="sc-glow"></div>
+            </div>
+            <div class="stat-card" style="--accent: var(--green)">
+              <div class="sc-label">Holdings</div>
+              <div class="sc-value" id="portfolio-count">0</div>
+              <div class="sc-glow"></div>
+            </div>
+          </div>
+          <div class="portfolio-grid">
+            <div class="panel">
+              <div class="panel-header"><h2>Allocation</h2></div>
+              <div class="pie-wrap"><canvas id="portfolio-pie-chart"></canvas></div>
+            </div>
+            <div class="panel">
+              <div class="panel-header"><h2>Holdings</h2></div>
+              <div class="table-scroll">
+                <table class="data-table">
+                  <thead>
+                    <tr><th>Coin</th><th>Amount</th><th>Avg Buy</th><th>Current</th><th>Value</th><th>P&amp;L</th><th>%</th><th></th></tr>
+                  </thead>
+                  <tbody id="holdings-body"></tbody>
+                </table>
+              </div>
+              <div id="portfolio-empty" class="empty-state">
+                <div class="empty-glyph">◈</div>
+                <p>No holdings yet. Add your first position.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── PREDICTION ── -->
+        <section id="view-prediction" class="view">
+          <div class="view-header">
+            <div class="view-title-block"><h1>Price Prediction</h1></div>
+            <div class="view-controls">
+              <div id="pred-coin-wrap" style="min-width:170px;"></div>
+              <div id="pred-days-wrap" style="min-width:150px;"></div>
+              <button class="btn-primary" id="run-prediction-btn">Run Prediction</button>
+            </div>
+          </div>
+          <div class="prediction-layout">
+            <div class="panel pred-chart-panel">
+              <div class="panel-header">
+                <h2>Price Forecast</h2>
+                <span class="badge-pill">Linear Regression</span>
+              </div>
+              <div class="pred-canvas-wrap"><canvas id="prediction-chart"></canvas></div>
+            </div>
+            <div class="pred-sidebar">
+              <div class="panel">
+                <div class="panel-header"><h3>Forecast Summary</h3></div>
+                <div id="prediction-summary" class="pred-summary"></div>
+              </div>
+              <div class="panel">
+                <div class="panel-header"><h3>Model Info</h3></div>
+                <div class="model-body">
+                  <p>Uses <strong>linear regression</strong> on 90 days of closing prices to project future trends.</p>
+                  <p>Confidence bands represent ±1.96 × RMSE (95% interval).</p>
+                  <p class="disclaimer">⚠ Educational purposes only. Not financial advice.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── WATCHLIST ── -->
+        <section id="view-watchlist" class="view">
+          <div class="view-header">
+            <div class="view-title-block">
+              <h1>Watchlist</h1>
+              <p class="view-sub">Your starred cryptocurrencies</p>
+            </div>
+          </div>
+          <div id="watchlist-empty" class="empty-state" style="display:none">
+            <div class="empty-glyph">☆</div>
+            <p>No coins starred yet.<br>Click ☆ on any coin in Markets to track it here.</p>
+          </div>
+          <div class="panel" id="watchlist-panel" style="display:none">
+            <div class="table-scroll">
+              <table class="data-table">
+                <thead>
+                  <tr><th>#</th><th>Coin</th><th>Price</th><th>1h</th><th>24h</th><th>7d</th><th>Market Cap</th><th>Trend</th><th></th></tr>
+                </thead>
+                <tbody id="watchlist-body"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── SITE FOOTER ── -->
+        <footer class="site-footer">
+          <div class="footer-glow-bar"></div>
+
+          <div class="footer-inner">
+
+            <!-- Brand Column -->
+            <div class="footer-brand">
+              <div class="footer-logo">
+                <svg width="30" height="30" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <linearGradient id="fl1" x1="3" y1="3" x2="31" y2="31" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#F72585"/>
+                      <stop offset="1" stop-color="#4CC9F0"/>
+                    </linearGradient>
+                    <linearGradient id="fl2" x1="17" y1="3" x2="17" y2="31" gradientUnits="userSpaceOnUse">
+                      <stop stop-color="#F72585" stop-opacity="0.18"/>
+                      <stop offset="1" stop-color="#4CC9F0" stop-opacity="0.08"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M17 3L31 10.5V23.5L17 31L3 23.5V10.5L17 3Z" fill="url(#fl2)" stroke="url(#fl1)" stroke-width="1.5"/>
+                  <path d="M17 3L17 31" stroke="url(#fl1)" stroke-width="0.6" stroke-opacity="0.35"/>
+                  <path d="M3 10.5L31 23.5" stroke="url(#fl1)" stroke-width="0.6" stroke-opacity="0.35"/>
+                  <path d="M3 23.5L31 10.5" stroke="url(#fl1)" stroke-width="0.6" stroke-opacity="0.35"/>
+                  <path d="M17 9L22.5 17L17 25L11.5 17L17 9Z" fill="url(#fl1)" opacity="0.9"/>
+                  <circle cx="17" cy="17" r="2.5" fill="#ffffff" opacity="0.95"/>
+                </svg>
+                <span class="footer-wordmark">CRYPTONEX</span>
+              </div>
+              <p class="footer-tagline">Crypto Intelligence Platform</p>
+              <p class="footer-desc">Real-time market data, advanced charting, AI-driven price prediction, and portfolio tracking — built as an academic project powered by the CoinGecko public API.</p>
+              <div class="footer-live-badge">
+                <span class="footer-live-dot"></span>
+                <span>Markets Live</span>
+              </div>
+            </div>
+
+            <!-- Resources Column -->
+            <div class="footer-col">
+              <h4 class="footer-col-title">Resources</h4>
+              <ul class="footer-links">
+                <li><a href="https://docs.coingecko.com/" target="_blank" rel="noopener noreferrer">CoinGecko API Docs</a></li>
+                <li><a href="https://www.coingecko.com/" target="_blank" rel="noopener noreferrer">CoinGecko — Market Data</a></li>
+                <li><a href="https://coinmarketcap.com/" target="_blank" rel="noopener noreferrer">CoinMarketCap</a></li>
+                <li><a href="https://www.investopedia.com/cryptocurrency-4427699" target="_blank" rel="noopener noreferrer">Investopedia — Crypto Guide</a></li>
+                <li><a href="https://www.coindesk.com/" target="_blank" rel="noopener noreferrer">CoinDesk — Crypto News</a></li>
+                <li><a href="https://www.tradingview.com/" target="_blank" rel="noopener noreferrer">TradingView — Charts</a></li>
+              </ul>
+            </div>
+
+            <!-- About Us Column -->
+            <div class="footer-col">
+              <h4 class="footer-col-title">About Us</h4>
+              <p class="footer-col-desc">CryptoNex is an academic project built to explore real-time cryptocurrency data visualization. It features a live market dashboard, interactive charts with technical indicators, a portfolio tracker, AI-driven price prediction, and a market heatmap — all powered by the CoinGecko public API and built with vanilla JavaScript, HTML, and CSS.</p>
+            </div>
+
+            <!-- Platform Column -->
+            <div class="footer-col">
+              <h4 class="footer-col-title">Platform</h4>
+              <ul class="footer-links">
+                <li><a href="#" data-nav="dashboard">Dashboard</a></li>
+                <li><a href="#" data-nav="markets">Markets</a></li>
+                <li><a href="#" data-nav="charts">Live Charts</a></li>
+                <li><a href="#" data-nav="portfolio">Portfolio Tracker</a></li>
+                <li><a href="#" data-nav="prediction">Price Prediction</a></li>
+                <li><a href="#" data-nav="heatmap">Market Heatmap</a></li>
+              </ul>
+            </div>
+
+          </div>
+        </footer>
+
+      </main>
+    </div>
+  </div>
+
+  <!-- Coin Detail Drawer -->
+  <div id="coin-drawer" class="coin-drawer">
+    <div id="coin-drawer-bg" class="drawer-bg"></div>
+    <div class="drawer-panel">
+      <div class="drawer-topbar">
+        <div class="drawer-coin-id">
+          <img id="drawer-img" src="" alt="" onerror="this.style.display='none'">
+          <div>
+            <div id="drawer-name" class="drawer-coin-name">—</div>
+            <div id="drawer-sym" class="drawer-coin-sym">—</div>
+          </div>
+        </div>
+        <button id="drawer-close" class="drawer-close-btn">✕</button>
+      </div>
+      <div class="drawer-price-section">
+        <div id="drawer-price" class="drawer-big-price">—</div>
+        <div id="drawer-change" class="drawer-price-change">—</div>
+      </div>
+      <div id="drawer-stats" class="drawer-stats-grid"></div>
+      <div class="drawer-actions">
+        <button id="drawer-btn-chart" class="btn-primary">View Chart</button>
+        <button id="drawer-btn-watch" class="btn-ghost">☆ Watch</button>
+        <button id="drawer-btn-alert" class="btn-ghost">🔔 Alert</button>
+      </div>
+      <div class="drawer-section">
+        <div class="drawer-section-title">ABOUT</div>
+        <div id="drawer-about" class="drawer-about-text">—</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Price Alert Modal -->
+  <div id="alert-modal" class="modal hidden">
+    <div class="modal-overlay" id="alert-overlay"></div>
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2>Set Price Alert</h2>
+        <button class="modal-x" id="close-alert-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="alert-coin-info" class="alert-coin-info"></div>
+        <div class="form-row">
+          <label>Notify when price is</label>
+          <div class="btn-group" id="alert-dir-group" style="margin-top:6px">
+            <button class="btn-seg active" data-dir="above">Above ↑</button>
+            <button class="btn-seg" data-dir="below">Below ↓</button>
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Target Price (USD)</label>
+          <input type="number" id="alert-target-price" placeholder="0.00" step="any" min="0">
+        </div>
+        <div id="alert-err" class="err-msg hidden"></div>
+        <button class="btn-primary btn-full" id="confirm-alert-btn">Set Alert</button>
+      </div>
+      <div class="modal-body" style="border-top:1px solid var(--border);padding-top:16px;margin-top:4px">
+        <div style="font-family:var(--font-d);letter-spacing:.08em;font-size:13px;color:var(--text-dim);margin-bottom:10px">ACTIVE ALERTS</div>
+        <div id="alerts-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Holding Modal -->
+  <div id="add-holding-modal" class="modal hidden">
+    <div class="modal-overlay" id="modal-overlay"></div>
+    <div class="modal-box">
+      <div class="modal-head">
+        <h2>Add Holding</h2>
+        <button class="modal-x" id="close-modal">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label>Coin</label>
+          <div id="holding-coin-wrap"></div>
+        </div>
+        <div class="form-row">
+          <label>Amount</label>
+          <input type="number" id="holding-amount" placeholder="0.00" step="any" min="0">
+        </div>
+        <div class="form-row">
+          <label>Buy Price (USD)</label>
+          <input type="number" id="holding-buy-price" placeholder="0.00" step="any" min="0">
+        </div>
+        <div id="holding-error" class="err-msg hidden"></div>
+        <button class="btn-primary btn-full" id="confirm-add-holding">Add to Portfolio</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Annotation Modal -->
+  <div id="annotation-modal" class="modal hidden">
+    <div class="modal-overlay" id="annotation-overlay"></div>
+    <div class="modal-box" style="width:320px">
+      <div class="modal-head">
+        <h2>Add Note</h2>
+        <button class="modal-x" id="close-annotation">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="form-row">
+          <label>Note</label>
+          <input type="text" id="annotation-text" placeholder="e.g. Buy signal, Support...">
+        </div>
+        <button class="btn-primary btn-full" id="confirm-annotation">Add Note</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/lightweight-charts@4.1.3/dist/lightweight-charts.standalone.production.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/indicators.js"></script>
+  <script src="js/prediction.js"></script>
+  <script src="js/portfolio.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
