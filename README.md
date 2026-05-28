@@ -1,6 +1,6 @@
 # CryptoNex — Crypto Intelligence Platform
 
-> Track live prices, analyze markets, manage your portfolio, and predict price movements — all in one place.
+Track live prices, analyze markets, manage your portfolio, and predict price movements — all in one place.
 
 **Live Demo:** https://funiantay.github.io/CryptoNex/
 
